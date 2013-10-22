@@ -126,38 +126,38 @@ public class CadastrarFilmePanel extends JPanel {
 		JLabel lblCadastroDeFilme = new JLabel("Cadastro de filmes");
 		lblCadastroDeFilme.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCadastroDeFilme.setFont(new Font("Segoe UI Light", Font.PLAIN, 25));
-		add(lblCadastroDeFilme, "5, 4, 36, 1");
+		add(lblCadastroDeFilme, "5, 4, 28, 1");
 		
 		JLabel lblNomeDoFilme = new JLabel("Nome do Filme:");
 		lblNomeDoFilme.setFont(new Font("Segoe UI Light", Font.PLAIN, 13));
-		add(lblNomeDoFilme, "6, 8, 7, 1");
+		add(lblNomeDoFilme, "6, 8");
 		
 		textNome = new JTextField();
-		add(textNome, "14, 8, 27, 1, fill, default");
+		add(textNome, "10, 8, 25, 1, fill, default");
 		textNome.setColumns(10);
 		
 		JLabel lblAutor = new JLabel("Diretor:");
 		lblAutor.setFont(new Font("Segoe UI Light", Font.PLAIN, 13));
-		add(lblAutor, "6, 10, 5, 1");
+		add(lblAutor, "6, 10");
 		
 		textDiretor = new JTextField();
-		add(textDiretor, "14, 10, 27, 1, fill, default");
+		add(textDiretor, "10, 10, 25, 1, fill, default");
 		textDiretor.setColumns(10);
 		
 		JLabel lblGnero = new JLabel("G\u00EAnero:");
 		lblGnero.setFont(new Font("Segoe UI Light", Font.PLAIN, 13));
-		add(lblGnero, "6, 12, 4, 1");
+		add(lblGnero, "6, 12");
 		
 		textGenero = new JTextField();
-		add(textGenero, "14, 12, 27, 1, fill, default");
+		add(textGenero, "10, 12, 25, 1, fill, default");
 		textGenero.setColumns(10);
 		
 		JLabel lblQualidade = new JLabel("Qualidade:");
 		lblQualidade.setFont(new Font("Segoe UI Light", Font.PLAIN, 13));
-		add(lblQualidade, "6, 14, 5, 1");
+		add(lblQualidade, "6, 14");
 		
 		textField = new JTextField();
-		add(textField, "14, 14, 27, 1, fill, default");
+		add(textField, "10, 14, 25, 1, fill, default");
 		textField.setColumns(10);
 		
 		JButton btnCancelar = new JButton(new CancelarFilmeAction(this));

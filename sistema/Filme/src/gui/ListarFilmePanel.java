@@ -102,7 +102,7 @@ public class ListarFilmePanel extends JPanel {
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Por Qualidade", "Por G\u00EAnero", "Por Diretor", "Listar todos"}));
 		comboBox.setToolTipText("");
 		comboBox.setFont(new Font("Segoe UI Light", Font.PLAIN, 11));
-		add(comboBox, "28, 6, 7, 1, fill, default");
+		add(comboBox, "14, 8, 11, 1, fill, default");
 		
 		JButton btnNewButton = new JButton("Listar");
 		btnNewButton.setFont(new Font("Segoe UI Light", Font.PLAIN, 15));
