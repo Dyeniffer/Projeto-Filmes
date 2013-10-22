@@ -3,12 +3,14 @@ package pojo;
 public class Filme {
 	private String nome;
 	private String genero;
-	private String autor;
+	private String diretor;
+	private int qualidade;
 
-	public Filme(String nome, String genero, String autor){
+	public Filme(String nome, String genero, String diretor, int qualidade){
 		this.nome = nome;
 		this.genero = genero;
-		this.autor = autor;
+		this.diretor = diretor;
+		this.qualidade = qualidade;
 	}
 
 
@@ -28,12 +30,20 @@ public class Filme {
 		this.genero = genero;
 	}
 
-	public String getAutor() {
-		return autor;
+	public String getDiretor() {
+		return diretor;
 	}
 
-	public void setAutor(String autor) {
-		this.autor = autor;
+	public void setDiretor(String diretor) {
+		this.diretor = diretor;
+	}
+	
+	public int getQualidade() {
+		return qualidade;
+	}
+
+	public void setQualidade(int qualidade) {
+		this.qualidade = qualidade;
 	}
 
 }

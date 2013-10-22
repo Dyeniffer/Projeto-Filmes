@@ -14,6 +14,11 @@ import javax.swing.AbstractAction;
 import java.awt.event.ActionEvent;
 import javax.swing.Action;
 import java.awt.Color;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 import gui.*;
 
 public class TelaPrincipal {
@@ -24,6 +29,7 @@ public class TelaPrincipal {
 	private CardLayout card;
 	private CadastrarFilmePanel cdFilmePanel = new CadastrarFilmePanel();
 	private ListarFilmePanel fdFilmePanel = new ListarFilmePanel();
+
 
 	/**
 	 * Launch the application.
@@ -44,6 +50,7 @@ public class TelaPrincipal {
 	/**
 	 * Create the application.
 	 */
+
 	public TelaPrincipal() {
 		initialize();
 	}
@@ -90,17 +97,20 @@ public class TelaPrincipal {
 			putValue(NAME, "Cadastrar novo filme");
 			putValue(SHORT_DESCRIPTION, "");
 		}
+
 		public void actionPerformed(ActionEvent e) {
 			card.show(frame.getContentPane(), "name_6126640247321");
 		}
 	}
+
 	private class SwingAction_1 extends AbstractAction {
 		public SwingAction_1() {
 			putValue(NAME, "Listar Filmes");
 			putValue(SHORT_DESCRIPTION, "");
 		}
+
 		public void actionPerformed(ActionEvent e) {
-			card.show(frame.getContentPane(), "name_6128366176959");			
+			card.show(frame.getContentPane(), "name_6128366176959");
 		}
 	}
 }

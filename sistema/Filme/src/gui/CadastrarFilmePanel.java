@@ -33,7 +33,7 @@ public class CadastrarFilmePanel extends JPanel {
 	private JTextField textNome;
 	private JTextField textDiretor;
 	private JTextField textGenero;
-	private JTextField textField;
+	private JTextField textQualidade;
 	
 	private CardLayout card;
 
@@ -42,7 +42,8 @@ public class CadastrarFilmePanel extends JPanel {
 	}
 	
 	public Filme getFilme(){
-		return new Filme(textNome.getText(), textDiretor.getText(), textGenero.getText());
+		int i = Integer.parseInt(textQualidade.getText());  
+		return new Filme(textNome.getText(), textDiretor.getText(), textGenero.getText(), i);
 	}
 
 	public CadastrarFilmePanel() {
@@ -156,9 +157,9 @@ public class CadastrarFilmePanel extends JPanel {
 		lblQualidade.setFont(new Font("Segoe UI Light", Font.PLAIN, 13));
 		add(lblQualidade, "6, 14");
 		
-		textField = new JTextField();
-		add(textField, "10, 14, 25, 1, fill, default");
-		textField.setColumns(10);
+		textQualidade = new JTextField();
+		add(textQualidade, "10, 14, 25, 1, fill, default");
+		textQualidade.setColumns(10);
 		
 		JButton btnCancelar = new JButton(new CancelarFilmeAction(this));
 		btnCancelar.setToolTipText("Cancelar cadastro de filme");
