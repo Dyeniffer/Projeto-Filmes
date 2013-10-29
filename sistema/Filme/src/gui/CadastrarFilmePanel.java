@@ -28,12 +28,17 @@ import javax.swing.Action;
 
 import dao.FilmeDao;
 import pojo.Filme;
+import javax.swing.JRadioButton;
 
 public class CadastrarFilmePanel extends JPanel {
 	private JTextField textNome;
 	private JTextField textDiretor;
 	private JTextField textGenero;
-	private JTextField textQualidade;
+	JRadioButton radioButton;
+	JRadioButton radioButton_1;
+	JRadioButton radioButton_2;
+	JRadioButton radioButton_3;
+	JRadioButton radioButton_4;
 	
 	private CardLayout card;
 
@@ -42,8 +47,24 @@ public class CadastrarFilmePanel extends JPanel {
 	}
 	
 	public Filme getFilme(){
-		int i = Integer.parseInt(textQualidade.getText());  
-		return new Filme(textNome.getText(), textDiretor.getText(), textGenero.getText(), i);
+		int qualidade = 0;
+		if (radioButton.isSelected() == true) qualidade = 1;
+		if (radioButton_1.isSelected() == true) qualidade = 2;
+		if (radioButton_2.isSelected() == true) qualidade = 3;
+		if (radioButton_3.isSelected() == true) qualidade = 4;
+		if (radioButton_4.isSelected() == true) qualidade = 5;
+		return new Filme(textNome.getText(), textDiretor.getText(), textGenero.getText(), qualidade);
+	}
+	
+	public void limpar(){
+		textNome.setText("");
+		textDiretor.setText("");
+		textGenero.setText("");
+		radioButton.setSelected(false);
+		radioButton_1.setSelected(false);
+		radioButton_2.setSelected(false);
+		radioButton_3.setSelected(false);
+		radioButton_4.setSelected(false);
 	}
 
 	public CadastrarFilmePanel() {
@@ -66,7 +87,11 @@ public class CadastrarFilmePanel extends JPanel {
 				FormFactory.RELATED_GAP_COLSPEC,
 				FormFactory.DEFAULT_COLSPEC,
 				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,
+				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,
 				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("default:grow"),
 				FormFactory.RELATED_GAP_COLSPEC,
@@ -127,14 +152,14 @@ public class CadastrarFilmePanel extends JPanel {
 		JLabel lblCadastroDeFilme = new JLabel("Cadastro de filmes");
 		lblCadastroDeFilme.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCadastroDeFilme.setFont(new Font("Segoe UI Light", Font.PLAIN, 25));
-		add(lblCadastroDeFilme, "5, 4, 28, 1");
+		add(lblCadastroDeFilme, "5, 4, 32, 1");
 		
 		JLabel lblNomeDoFilme = new JLabel("Nome do Filme:");
 		lblNomeDoFilme.setFont(new Font("Segoe UI Light", Font.PLAIN, 13));
 		add(lblNomeDoFilme, "6, 8");
 		
 		textNome = new JTextField();
-		add(textNome, "10, 8, 25, 1, fill, default");
+		add(textNome, "10, 8, 21, 1, fill, default");
 		textNome.setColumns(10);
 		
 		JLabel lblAutor = new JLabel("Diretor:");
@@ -142,7 +167,7 @@ public class CadastrarFilmePanel extends JPanel {
 		add(lblAutor, "6, 10");
 		
 		textDiretor = new JTextField();
-		add(textDiretor, "10, 10, 25, 1, fill, default");
+		add(textDiretor, "10, 10, 21, 1, fill, default");
 		textDiretor.setColumns(10);
 		
 		JLabel lblGnero = new JLabel("G\u00EAnero:");
@@ -150,16 +175,27 @@ public class CadastrarFilmePanel extends JPanel {
 		add(lblGnero, "6, 12");
 		
 		textGenero = new JTextField();
-		add(textGenero, "10, 12, 25, 1, fill, default");
+		add(textGenero, "10, 12, 21, 1, fill, default");
 		textGenero.setColumns(10);
 		
 		JLabel lblQualidade = new JLabel("Qualidade:");
 		lblQualidade.setFont(new Font("Segoe UI Light", Font.PLAIN, 13));
 		add(lblQualidade, "6, 14");
 		
-		textQualidade = new JTextField();
-		add(textQualidade, "10, 14, 25, 1, fill, default");
-		textQualidade.setColumns(10);
+		radioButton = new JRadioButton("1");
+		add(radioButton, "10, 14");
+		
+		radioButton_1 = new JRadioButton("2");
+		add(radioButton_1, "12, 14");
+		
+		radioButton_2 = new JRadioButton("3");
+		add(radioButton_2, "16, 14");
+		
+		radioButton_3 = new JRadioButton("4");
+		add(radioButton_3, "18, 14");
+		
+		radioButton_4 = new JRadioButton("5");
+		add(radioButton_4, "22, 14");
 		
 		JButton btnCancelar = new JButton(new CancelarFilmeAction(this));
 		btnCancelar.setToolTipText("Cancelar cadastro de filme");
@@ -171,13 +207,13 @@ public class CadastrarFilmePanel extends JPanel {
 		btnCadastrar.setToolTipText("Cadastrar filme");
 		btnCadastrar.setMnemonic(KeyEvent.VK_ENTER);
 		btnCadastrar.setFont(new Font("Segoe UI Light", Font.PLAIN, 14));
-		add(btnCadastrar, "15, 16, 13, 1");
+		add(btnCadastrar, "17, 16, 15, 1");
 		
 		Component horizontalStrut = Box.createHorizontalStrut(20);
 		add(horizontalStrut, "2, 24");
 		
 		Component verticalStrut_1 = Box.createVerticalStrut(20);
-		add(verticalStrut_1, "46, 24");
+		add(verticalStrut_1, "50, 24");
 
 	}
 }

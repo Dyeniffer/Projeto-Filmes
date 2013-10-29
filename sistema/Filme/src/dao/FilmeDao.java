@@ -7,6 +7,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import pojo.Filme;
@@ -14,7 +16,7 @@ import pojo.Filme;
 public class FilmeDao {
 	private Connection db;
 	private Statement statement;
-	private ResultSet resultset;
+	private ResultSet rs;
 	private PreparedStatement st;
 
 	public void conecta() throws Exception {
@@ -46,8 +48,8 @@ public class FilmeDao {
 
 			st = db.prepareStatement(cmd);
 			st.setString(1, filme.getNome());
-			st.setString(2, filme.getGenero());
-			st.setString(3, filme.getDiretor());
+			st.setString(3, filme.getGenero());
+			st.setString(2, filme.getDiretor());
 			st.setInt(4, filme.getQualidade());
 			int r = st.executeUpdate();
 
@@ -57,55 +59,52 @@ public class FilmeDao {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 		desconecta();
 	}
 
-	public Filme findFilmeByNome(String nome) {
-		Filme filme = null;
-		String cmd = "select * from filme where nome like ?";
+	public List<Filme> listarFilmes(int ordem) {
 
-		Connection db = null;
-		PreparedStatement st = null;
-		ResultSet rs = null;
+		List<Filme> lista = new ArrayList<Filme>();
+		String cmd = "";
+
+		switch(ordem){
+			case 0: cmd = "SELECT * FROM filmes ORDER BY qualidade"; break;
+				
+			case 1: cmd = "SELECT * FROM filmes ORDER BY genero"; break;
+				
+			case 2: cmd = "SELECT * FROM filmes ORDER BY diretor"; break;
+				
+			case 3: cmd = "SELECT * FROM filmes ORDER BY nome"; break;
+		}
+
+		db = null;
+		st = null;
+		rs = null;
 
 		try {
-			Properties prop = new Properties();
-			prop.load(new FileInputStream("filme.properties"));
-			String url = prop.getProperty("url");
-
-			db = DriverManager.getConnection(url, prop);
-
+			conecta();
 			st = db.prepareStatement(cmd);
-			st.setString(1, nome);
 			rs = st.executeQuery();
 
 			while (rs.next()) {
 				// copiar dados para POJO
-				String nomeBD = rs.getString("nome");
+				String nome = rs.getString(2);
 				String genero = rs.getString(3);
-				String autor = rs.getString(4);
+				String diretor = rs.getString(4);
 				int qualidade = rs.getInt(5);
-				filme = new Filme(nomeBD, genero, autor, qualidade);
+				lista.add(new Filme(nome, genero, diretor, qualidade));
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			try {
-				if (rs != null) {
-					rs.close();
-				}
-				if (st != null) {
-					st.close();
-				}
-				if (db != null) {
-					db.close();
-				}
+				desconecta();
 			} catch (Exception e2) {
 				e2.printStackTrace();
 			}
 		}
-		return filme;
+		return lista;
 	}
 }

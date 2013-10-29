@@ -3,6 +3,7 @@ package gui.Action;
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
+import javax.swing.JOptionPane;
 
 import dao.FilmeDao;
 import gui.CadastrarFilmePanel;
@@ -26,5 +27,7 @@ public class CadastrarFilmeAction extends AbstractAction {
 		Filme c = panel.getFilme();
 		FilmeDao dao = new FilmeDao();
 		dao.insertFilme(c);
+		JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
+		panel.limpar();
 	}
 }

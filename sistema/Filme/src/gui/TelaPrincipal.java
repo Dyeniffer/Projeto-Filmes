@@ -29,6 +29,7 @@ public class TelaPrincipal {
 	private CardLayout card;
 	private CadastrarFilmePanel cdFilmePanel = new CadastrarFilmePanel();
 	private ListarFilmePanel fdFilmePanel = new ListarFilmePanel();
+	private ImprimirListaOrdenada imprimeFilmesOrdenados = new ImprimirListaOrdenada();
 
 
 	/**
@@ -76,6 +77,12 @@ public class TelaPrincipal {
 		frame.getContentPane().add(panel_1, "name_6128366176959");
 
 		panel_1.add(fdFilmePanel);
+		
+		JPanel panel_2 = new JPanel();
+		panel_1.setBackground(Color.WHITE);
+		frame.getContentPane().add(panel_2, "name_3");
+
+		panel_1.add(imprimeFilmesOrdenados);
 
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
@@ -90,6 +97,11 @@ public class TelaPrincipal {
 		JMenuItem mntmNewMenuItem = new JMenuItem("New menu item");
 		mntmNewMenuItem.setAction(action_1);
 		mnNewMenu.add(mntmNewMenuItem);
+		
+	}
+	
+	public void mostraListaOrdenada(){
+		card.show(frame.getContentPane(), "name_3");
 	}
 
 	private class SwingAction extends AbstractAction {

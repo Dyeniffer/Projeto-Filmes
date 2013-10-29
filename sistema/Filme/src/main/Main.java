@@ -10,13 +10,13 @@ public class Main {
 
 	static TelaPrincipal frame = new TelaPrincipal();
 	
-	public static void main(String[] args) {
-		JFrame frm = new JFrame();
-		JPanel contentPanel = (JPanel)frm.getContentPane();
-				try {
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-	}
+//	public static void main(String[] args) {
+//		JFrame frm = new JFrame();
+//		JPanel contentPanel = (JPanel)frm.getContentPane();
+//				try {
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//	}
 }

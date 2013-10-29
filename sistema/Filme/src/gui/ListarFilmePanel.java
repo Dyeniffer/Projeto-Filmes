@@ -1,5 +1,7 @@
 package gui;
 
+import gui.Action.ListarFilmesAction;
+
 import javax.swing.JPanel;
 import java.awt.Color;
 import com.jgoodies.forms.layout.FormLayout;
@@ -10,6 +12,8 @@ import java.awt.Component;
 import javax.swing.Box;
 import javax.swing.JLabel;
 import java.awt.Font;
+
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
@@ -21,6 +25,11 @@ public class ListarFilmePanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
+	
+	public int getOrdena(){
+		return comboBox.getSelectedIndex();
+	}
+	
 	public ListarFilmePanel() {
 		setBackground(Color.WHITE);
 		setLayout(new FormLayout(new ColumnSpec[] {
@@ -99,12 +108,12 @@ public class ListarFilmePanel extends JPanel {
 		add(lblListarFilmes, "4, 4, 31, 1");
 		
 		
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Por Qualidade", "Por G\u00EAnero", "Por Diretor", "Listar todos"}));
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Por Qualidade", "Por G\u00EAnero", "Por Diretor", "Por Nome"}));
 		comboBox.setToolTipText("");
 		comboBox.setFont(new Font("Segoe UI Light", Font.PLAIN, 11));
 		add(comboBox, "14, 8, 11, 1, fill, default");
 		
-		JButton btnNewButton = new JButton("Listar");
+		JButton btnNewButton = new JButton(new ListarFilmesAction(this));
 		btnNewButton.setFont(new Font("Segoe UI Light", Font.PLAIN, 15));
 		add(btnNewButton, "14, 12, 11, 1");
 		

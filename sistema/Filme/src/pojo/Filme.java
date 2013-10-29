@@ -46,4 +46,12 @@ public class Filme {
 		this.qualidade = qualidade;
 	}
 
+
+	@Override
+	public String toString() {
+		return "nome: " + nome + "\n genero: " + genero + "\n diretor: "
+				+ diretor + "\n qualidade: " + qualidade;
+	}
+
+	
 }
