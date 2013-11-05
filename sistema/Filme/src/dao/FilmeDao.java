@@ -69,13 +69,13 @@ public class FilmeDao {
 		String cmd = "";
 
 		switch(ordem){
-			case 0: cmd = "SELECT * FROM filmes ORDER BY qualidade"; break;
+			case 0: cmd = "SELECT * FROM filmes ORDER BY diretor"; break;
 				
 			case 1: cmd = "SELECT * FROM filmes ORDER BY genero"; break;
 				
-			case 2: cmd = "SELECT * FROM filmes ORDER BY diretor"; break;
+			case 2: cmd = "SELECT * FROM filmes ORDER BY nome"; break;
 				
-			case 3: cmd = "SELECT * FROM filmes ORDER BY nome"; break;
+			case 3: cmd = "SELECT * FROM filmes ORDER BY qualidade"; break;
 		}
 
 		db = null;

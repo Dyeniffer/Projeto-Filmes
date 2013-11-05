@@ -1,44 +1,70 @@
 package gui;
 
-import gui.Action.ListarFilmesAction;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
 import java.awt.Color;
+import java.awt.Dimension;
+
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.factories.FormFactory;
+
+import dao.FilmeDao;
+
 import java.awt.Component;
 import javax.swing.Box;
-import javax.swing.JLabel;
-import java.awt.Font;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.swing.JOptionPane;
-import javax.swing.SwingConstants;
-import javax.swing.JComboBox;
-import javax.swing.JButton;
-import javax.swing.DefaultComboBoxModel;
+
+import javax.swing.JTextArea;
+
+import pojo.Filme;
+import java.awt.Font;
 
 public class ListarFilmePanel extends JPanel {
 
-	private JComboBox comboBox = new JComboBox();
-	/**
-	 * Create the panel.
-	 */
+	private static final long serialVersionUID = 1L;
+	private int ordem = 0;
 	
-	public int getOrdena(){
-		return comboBox.getSelectedIndex();
+	List<Filme> lista = new ArrayList<Filme>();
+	private JTextArea textArea;
+
+	public void setOrdem(int x){
+		this.ordem = x;
+		textArea.setText("");
+		textArea.setText(alimentaString());
 	}
 	
+	public void alimentaLista(){
+		FilmeDao dao = new FilmeDao();
+		this.lista = dao.listarFilmes(ordem);
+	}
+	
+	public String alimentaString() {
+		String retorno = "";
+
+		alimentaLista();
+
+		for (int i = 0; i < this.lista.size(); i++) {
+			retorno += this.lista.get(i).toString() + "\n\n";
+		}
+
+		return retorno;
+	}
+
 	public ListarFilmePanel() {
 		setBackground(Color.WHITE);
 		setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.RELATED_GAP_COLSPEC,
 				FormFactory.DEFAULT_COLSPEC,
 				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,
+				ColumnSpec.decode("default:grow"),
 				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,
+				ColumnSpec.decode("default:grow"),
 				FormFactory.RELATED_GAP_COLSPEC,
 				FormFactory.DEFAULT_COLSPEC,
 				FormFactory.RELATED_GAP_COLSPEC,
@@ -73,7 +99,7 @@ public class ListarFilmePanel extends JPanel {
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
-				FormFactory.DEFAULT_ROWSPEC,
+				RowSpec.decode("default:grow"),
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
@@ -94,34 +120,28 @@ public class ListarFilmePanel extends JPanel {
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,}));
-		
+
 		Component verticalStrut = Box.createVerticalStrut(20);
 		add(verticalStrut, "2, 2");
-		
+
 		Component verticalStrut_1 = Box.createVerticalStrut(20);
 		add(verticalStrut_1, "36, 2");
 		
-		JLabel lblListarFilmes = new JLabel("Listar Filmes");
-		lblListarFilmes.setHorizontalAlignment(SwingConstants.CENTER);
-		lblListarFilmes.setFont(new Font("Segoe UI Light", Font.PLAIN, 25));
-		lblListarFilmes.setBackground(new Color(240, 240, 240));
-		add(lblListarFilmes, "4, 4, 31, 1");
+		Dimension dimension = new Dimension(400, 400);
 		
+		textArea = new JTextArea(alimentaString());
+		textArea.setEditable(false);
+		textArea.setFont(new Font("Segoe UI Light", Font.PLAIN, 15));
+		textArea.setBackground(Color.WHITE);
 		
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Por Qualidade", "Por G\u00EAnero", "Por Diretor", "Por Nome"}));
-		comboBox.setToolTipText("");
-		comboBox.setFont(new Font("Segoe UI Light", Font.PLAIN, 11));
-		add(comboBox, "14, 8, 11, 1, fill, default");
+		JScrollPane scroll = new JScrollPane(textArea);
+		scroll.setPreferredSize(dimension);		
 		
-		JButton btnNewButton = new JButton(new ListarFilmesAction(this));
-		btnNewButton.setFont(new Font("Segoe UI Light", Font.PLAIN, 15));
-		add(btnNewButton, "14, 12, 11, 1");
+		add(scroll, "4, 4, 31, 19, fill, fill");
 		
 		Component horizontalStrut = Box.createHorizontalStrut(20);
 		add(horizontalStrut, "2, 24");
-		}
-	
-		public int getComboBox(){
-			return comboBox.getSelectedIndex();
-		}
+
+		
+	}
 }
