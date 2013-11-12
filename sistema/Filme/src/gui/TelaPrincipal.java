@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import java.awt.Toolkit;
 import java.awt.CardLayout;
+
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JMenuBar;
@@ -33,17 +35,19 @@ public class TelaPrincipal {
 	private final Action action_Cadastrar = new SwingAction_3();
 	private final Action action_Remover = new SwingAction_4();
 
-	private final Action action_ListarPorGenero = new SwingAction_6();
-	private final Action action_ListarPorNome = new SwingAction_7();
-	private final Action action_ListarPorQualidade = new SwingAction_8();
 	private final Action action_ManualDoUsuario = new SwingAction_9();
 	private final Action action_Sobre = new SwingAction_10();
 	private CardLayout card;
 	private CadastrarFilmePanel cdFilmePanel = new CadastrarFilmePanel();
 	private ListarFilmePanel fdFilmePanel = new ListarFilmePanel();
 	private ImprimirListaOrdenada imprimeFilmesOrdenados = new ImprimirListaOrdenada();
-	private final Action action_ListarPorDiretor = new SwingAction_5(fdFilmePanel);
-
+	private final Action action_ListarPorDiretor = new SwingAction_5(
+			fdFilmePanel);
+	private final Action action_ListarPorGenero = new SwingAction_6(
+			fdFilmePanel);
+	private final Action action_ListarPorNome = new SwingAction_7(fdFilmePanel);
+	private final Action action_ListarPorQualidade = new SwingAction_8(
+			fdFilmePanel);
 
 	/**
 	 * Launch the application.
@@ -73,7 +77,9 @@ public class TelaPrincipal {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
+		frame = new JFrame("Filmes");
+		ImageIcon icone = new ImageIcon("./src/icone.png"); 
+		frame.setIconImage(icone.getImage());
 		frame.setBounds(100, 100, 600, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		card = new CardLayout(0, 0);
@@ -87,11 +93,10 @@ public class TelaPrincipal {
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(Color.WHITE);
-		frame.getContentPane().add(panel_1, "name_ListarPorDiretor");
+		frame.getContentPane().add(panel_1, "name_Listar");
 
 		panel_1.add(fdFilmePanel);
-		
-		
+
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
 
@@ -108,61 +113,56 @@ public class TelaPrincipal {
 		mnCriarBKPBanco.setAction(action_CriarBKPBanco);
 		mnArquivo.add(mnCriarBKPBanco);
 		mnCriarBKPBanco.setEnabled(false);
-		
+
 		JMenuItem mnRestaurarBKPBanco = new JMenuItem("New menu item");
 		mnRestaurarBKPBanco.setAction(action_RestaurarBKPBanco);
 		mnArquivo.add(mnRestaurarBKPBanco);
 		mnRestaurarBKPBanco.setEnabled(false);
-		
+
 		mnArquivo.addSeparator();
 
 		JMenuItem mnSair = new JMenuItem("New menu item");
 		mnSair.setAction(action_Sair);
 		mnArquivo.add(mnSair);
-		
-		
-		JMenuItem mnCadastrarNovoFilme= new JMenuItem("New menu item");
+
+		JMenuItem mnCadastrarNovoFilme = new JMenuItem("New menu item");
 		mnCadastrarNovoFilme.setAction(action_Cadastrar);
 		mnCadastro.add(mnCadastrarNovoFilme);
-		
-		JMenuItem mnRemoverFilme= new JMenuItem("New menu item");
+
+		JMenuItem mnRemoverFilme = new JMenuItem("New menu item");
 		mnRemoverFilme.setAction(action_Remover);
 		mnCadastro.add(mnRemoverFilme);
 		mnRemoverFilme.setEnabled(false);
-		
-		JMenuItem mnListarPorDiretor= new JMenuItem("New menu item");
+
+		JMenuItem mnListarPorDiretor = new JMenuItem("New menu item");
 		mnListarPorDiretor.setAction(action_ListarPorDiretor);
 		mnConsulta.add(mnListarPorDiretor);
-		
-		JMenuItem mnListarPorGenero= new JMenuItem("New menu item");
+
+		JMenuItem mnListarPorGenero = new JMenuItem("New menu item");
 		mnListarPorGenero.setAction(action_ListarPorGenero);
 		mnConsulta.add(mnListarPorGenero);
-		mnListarPorGenero.setEnabled(false);
-		
-		JMenuItem mnListarPorNome= new JMenuItem("New menu item");
+
+		JMenuItem mnListarPorNome = new JMenuItem("New menu item");
 		mnListarPorNome.setAction(action_ListarPorNome);
 		mnConsulta.add(mnListarPorNome);
-		mnListarPorNome.setEnabled(false);
-		
+
 		JMenuItem mnListarPorQualidade = new JMenuItem("New menu item");
 		mnListarPorQualidade.setAction(action_ListarPorQualidade);
 		mnConsulta.add(mnListarPorQualidade);
-		mnListarPorQualidade.setEnabled(false);
-		
+
 		JMenuItem mnManualDoUsuario = new JMenuItem("New menu item");
 		mnManualDoUsuario.setAction(action_ManualDoUsuario);
 		mnAjuda.add(mnManualDoUsuario);
 		mnManualDoUsuario.setEnabled(false);
-		
+
 		JMenuItem mnSobre = new JMenuItem("New menu item");
 		mnSobre.setAction(action_Sobre);
 		mnAjuda.add(mnSobre);
 		mnSobre.setEnabled(false);
-		
-		
+
 	}
-	
-	public void mostraListaOrdenada(){
+
+	public void mostraListaOrdenada() {
 		card.show(frame.getContentPane(), "name_3");
 	}
 
@@ -187,7 +187,7 @@ public class TelaPrincipal {
 			card.show(frame.getContentPane(), "name_RestaurarBKPBD");
 		}
 	}
-	
+
 	private class SwingAction_2 extends AbstractAction {
 		public SwingAction_2() {
 			putValue(NAME, "Sair");
@@ -198,7 +198,7 @@ public class TelaPrincipal {
 			System.exit(0);
 		}
 	}
-	
+
 	private class SwingAction_3 extends AbstractAction {
 		public SwingAction_3() {
 			putValue(NAME, "Cadastrar novo filme");
@@ -209,7 +209,7 @@ public class TelaPrincipal {
 			card.show(frame.getContentPane(), "name_Cadastrar");
 		}
 	}
-	
+
 	private class SwingAction_4 extends AbstractAction {
 		public SwingAction_4() {
 			putValue(NAME, "Remover filme");
@@ -220,7 +220,7 @@ public class TelaPrincipal {
 			card.show(frame.getContentPane(), "name_RemoverFilme");
 		}
 	}
-	
+
 	private class SwingAction_5 extends AbstractAction {
 		private ListarFilmePanel fdFilmePanel;
 
@@ -231,44 +231,56 @@ public class TelaPrincipal {
 		}
 
 		public void actionPerformed(ActionEvent e) {
-			fdFilmePanel.setOrdem(1);
-			card.show(frame.getContentPane(), "name_ListarPorDiretor");
+			fdFilmePanel.setOrdem(0);
+			card.show(frame.getContentPane(), "name_Listar");
 		}
 	}
-	
+
 	private class SwingAction_6 extends AbstractAction {
-		public SwingAction_6() {
+		private ListarFilmePanel fdFilmePanel;
+
+		public SwingAction_6(ListarFilmePanel fdFilmePanel) {
+			this.fdFilmePanel = fdFilmePanel;
 			putValue(NAME, "Listar por Gênero");
 			putValue(SHORT_DESCRIPTION, "");
 		}
 
 		public void actionPerformed(ActionEvent e) {
-			card.show(frame.getContentPane(), "name_ListarPorGenero");
+			fdFilmePanel.setOrdem(1);
+			card.show(frame.getContentPane(), "name_Listar");
 		}
 	}
-	
+
 	private class SwingAction_7 extends AbstractAction {
-		public SwingAction_7() {
+		private ListarFilmePanel fdFilmePanel;
+
+		public SwingAction_7(ListarFilmePanel fdFilmePanel) {
+			this.fdFilmePanel = fdFilmePanel;
 			putValue(NAME, "Listar por Nome");
 			putValue(SHORT_DESCRIPTION, "");
 		}
 
 		public void actionPerformed(ActionEvent e) {
-			card.show(frame.getContentPane(), "name_ListarPorNome");
+			fdFilmePanel.setOrdem(2);
+			card.show(frame.getContentPane(), "name_Listar");
 		}
 	}
-	
+
 	private class SwingAction_8 extends AbstractAction {
-		public SwingAction_8() {
+		private ListarFilmePanel fdFilmePanel;
+
+		public SwingAction_8(ListarFilmePanel fdFilmePanel) {
+			this.fdFilmePanel = fdFilmePanel;
 			putValue(NAME, "Listar por Qualidade");
 			putValue(SHORT_DESCRIPTION, "");
 		}
 
 		public void actionPerformed(ActionEvent e) {
-			card.show(frame.getContentPane(), "name_ListarPorQualidade");
+			fdFilmePanel.setOrdem(3);
+			card.show(frame.getContentPane(), "name_Listar");
 		}
 	}
-	
+
 	private class SwingAction_9 extends AbstractAction {
 		public SwingAction_9() {
 			putValue(NAME, "Manual do usuário");
@@ -279,7 +291,7 @@ public class TelaPrincipal {
 			card.show(frame.getContentPane(), "name_ManualDoUsuário");
 		}
 	}
-	
+
 	private class SwingAction_10 extends AbstractAction {
 		public SwingAction_10() {
 			putValue(NAME, "Sobre");
