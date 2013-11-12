@@ -40,7 +40,7 @@ public class TelaPrincipal {
 	private CardLayout card;
 	private CadastrarFilmePanel cdFilmePanel = new CadastrarFilmePanel();
 	private ListarFilmePanel fdFilmePanel = new ListarFilmePanel();
-	private ImprimirListaOrdenada imprimeFilmesOrdenados = new ImprimirListaOrdenada();
+	private RemoverFilmesPanel removeFilmePanel = new RemoverFilmesPanel();
 	private final Action action_ListarPorDiretor = new SwingAction_5(
 			fdFilmePanel);
 	private final Action action_ListarPorGenero = new SwingAction_6(
@@ -96,6 +96,12 @@ public class TelaPrincipal {
 		frame.getContentPane().add(panel_1, "name_Listar");
 
 		panel_1.add(fdFilmePanel);
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(Color.WHITE);
+		frame.getContentPane().add(panel_2, "name_RemoverFilme");
+
+		panel_2.add(removeFilmePanel);
 
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
@@ -132,8 +138,7 @@ public class TelaPrincipal {
 		JMenuItem mnRemoverFilme = new JMenuItem("New menu item");
 		mnRemoverFilme.setAction(action_Remover);
 		mnCadastro.add(mnRemoverFilme);
-		mnRemoverFilme.setEnabled(false);
-
+		
 		JMenuItem mnListarPorDiretor = new JMenuItem("New menu item");
 		mnListarPorDiretor.setAction(action_ListarPorDiretor);
 		mnConsulta.add(mnListarPorDiretor);
@@ -218,6 +223,7 @@ public class TelaPrincipal {
 
 		public void actionPerformed(ActionEvent e) {
 			card.show(frame.getContentPane(), "name_RemoverFilme");
+			
 		}
 	}
 

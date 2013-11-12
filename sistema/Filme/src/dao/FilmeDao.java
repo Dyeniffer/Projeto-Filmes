@@ -62,6 +62,29 @@ public class FilmeDao {
 		}
 		desconecta();
 	}
+	
+	public void RemoveFilmePorNome(String nome) {
+		String cmd = "DELETE FROM filmes where nome like ?";
+
+		db = null;
+		st = null;
+
+		try {
+			conecta();
+
+			st = db.prepareStatement(cmd);
+			st.setString(1, nome);
+			int r = st.executeUpdate();
+
+			if (r != 1) {
+				throw new RuntimeException("Erro ao excluir Filme!");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		desconecta();
+	}
 
 	public List<Filme> listarFilmes(int ordem) {
 
@@ -107,4 +130,41 @@ public class FilmeDao {
 		}
 		return lista;
 	}
+	
+	public List<Filme> RemoverFilmes() {
+
+		List<Filme> lista = new ArrayList<Filme>();
+		String cmd = "SELECT * FROM filmes";
+		
+
+		db = null;
+		st = null;
+		rs = null;
+
+		try {
+			conecta();
+			st = db.prepareStatement(cmd);
+			rs = st.executeQuery();
+
+			while (rs.next()) {
+				// copiar dados para POJO
+				String nome = rs.getString(2);
+				String genero = rs.getString(3);
+				String diretor = rs.getString(4);
+				int qualidade = rs.getInt(5);
+				lista.add(new Filme(nome, genero, diretor, qualidade));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				desconecta();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return lista;
+	}
+	
 }
