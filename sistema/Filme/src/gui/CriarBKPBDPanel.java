@@ -1,7 +1,11 @@
-package gui.Action;
+package gui;
+
+import gui.Action.EscolherLocalDoBKPAction;
 
 import javax.swing.JPanel;
 import java.awt.Color;
+import java.awt.Font;
+
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
@@ -9,6 +13,8 @@ import com.jgoodies.forms.factories.FormFactory;
 import javax.swing.JButton;
 import javax.swing.AbstractAction;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+
 import javax.swing.Action;
 
 import java.io.FileInputStream;
@@ -18,7 +24,6 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 public class CriarBKPBDPanel extends JPanel {
-	private final Action action = new SwingAction();
 	private final Action action_1 = new SwingAction_1();
 	private String caminho;
 	byte[] buffer = new byte[1024];
@@ -59,9 +64,11 @@ public class CriarBKPBDPanel extends JPanel {
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,}));
 		
-		JButton btnEscolherLocal = new JButton("escolher local");
-		btnEscolherLocal.setAction(action);
-		add(btnEscolherLocal, "20, 6");
+		JButton btnLocal = new JButton(new EscolherLocalDoBKPAction(this));
+		btnLocal.setToolTipText("Cadastrar filme");
+		btnLocal.setMnemonic(KeyEvent.VK_ENTER);
+		btnLocal.setFont(new Font("Segoe UI Light", Font.PLAIN, 14));
+		add(btnLocal, "17, 16, 15, 1");
 		
 		JButton btnCriarCpiaDe = new JButton("criar c\u00F3pia de seguran\u00E7a");
 		btnCriarCpiaDe.setAction(action_1);
@@ -69,15 +76,7 @@ public class CriarBKPBDPanel extends JPanel {
 
 	}
 
-	private class SwingAction extends AbstractAction {
-		public SwingAction() {
-			putValue(NAME, "Escolher Caminho");
-			putValue(SHORT_DESCRIPTION, "Some short description");
-		}
-		public void actionPerformed(ActionEvent e) {
-			
-		}
-	}
+	
 	private class SwingAction_1 extends AbstractAction {
 		public SwingAction_1() {
 			putValue(NAME, "Criar Cópia de Segurança");

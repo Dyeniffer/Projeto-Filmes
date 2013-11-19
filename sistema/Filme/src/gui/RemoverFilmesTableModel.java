@@ -15,7 +15,7 @@ public class RemoverFilmesTableModel extends AbstractTableModel {
 
 	public RemoverFilmesTableModel() throws Exception {
 		try {
-			lista = dao.RemoverFilmes();
+			lista = dao.listarFilmes();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

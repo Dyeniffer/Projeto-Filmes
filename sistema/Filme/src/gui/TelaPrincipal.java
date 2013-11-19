@@ -7,12 +7,15 @@ import java.awt.Toolkit;
 import java.awt.CardLayout;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.AbstractAction;
+import javax.swing.JScrollPane;
+
 import java.awt.event.ActionEvent;
 import javax.swing.Action;
 
@@ -34,13 +37,17 @@ public class TelaPrincipal {
 	private final Action action_Sair = new SwingAction_2();
 	private final Action action_Cadastrar = new SwingAction_3();
 	private final Action action_Remover = new SwingAction_4();
-
 	private final Action action_ManualDoUsuario = new SwingAction_9();
 	private final Action action_Sobre = new SwingAction_10();
+
 	private CardLayout card;
+	
 	private CadastrarFilmePanel cdFilmePanel = new CadastrarFilmePanel();
 	private ListarFilmePanel fdFilmePanel = new ListarFilmePanel();
 	private RemoverFilmesPanel removeFilmePanel = new RemoverFilmesPanel();
+	private ManualPanel manualPanel = new ManualPanel();
+	private CriarBKPBDPanel bkpPanel = new CriarBKPBDPanel();
+	
 	private final Action action_ListarPorDiretor = new SwingAction_5(
 			fdFilmePanel);
 	private final Action action_ListarPorGenero = new SwingAction_6(
@@ -78,7 +85,7 @@ public class TelaPrincipal {
 	 */
 	private void initialize() {
 		frame = new JFrame("Filmes");
-		ImageIcon icone = new ImageIcon("./src/icone.png"); 
+		ImageIcon icone = new ImageIcon("./src/icone.png");
 		frame.setIconImage(icone.getImage());
 		frame.setBounds(100, 100, 600, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -96,13 +103,24 @@ public class TelaPrincipal {
 		frame.getContentPane().add(panel_1, "name_Listar");
 
 		panel_1.add(fdFilmePanel);
-		
+
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(Color.WHITE);
 		frame.getContentPane().add(panel_2, "name_RemoverFilme");
 
 		panel_2.add(removeFilmePanel);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBackground(Color.WHITE);
+		frame.getContentPane().add(panel_3, "name_Manual");
 
+		panel_3.add(manualPanel);
+
+		JPanel panel_4 = new JPanel();
+		panel_4.setBackground(Color.WHITE);
+		frame.getContentPane().add(panel_4, "name_CriarBKPBD");
+
+		panel_4.add(bkpPanel);
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
 
@@ -118,7 +136,7 @@ public class TelaPrincipal {
 		JMenuItem mnCriarBKPBanco = new JMenuItem("New menu item");
 		mnCriarBKPBanco.setAction(action_CriarBKPBanco);
 		mnArquivo.add(mnCriarBKPBanco);
-		mnCriarBKPBanco.setEnabled(false);
+		//mnCriarBKPBanco.setEnabled(false);
 
 		JMenuItem mnRestaurarBKPBanco = new JMenuItem("New menu item");
 		mnRestaurarBKPBanco.setAction(action_RestaurarBKPBanco);
@@ -138,7 +156,7 @@ public class TelaPrincipal {
 		JMenuItem mnRemoverFilme = new JMenuItem("New menu item");
 		mnRemoverFilme.setAction(action_Remover);
 		mnCadastro.add(mnRemoverFilme);
-		
+
 		JMenuItem mnListarPorDiretor = new JMenuItem("New menu item");
 		mnListarPorDiretor.setAction(action_ListarPorDiretor);
 		mnConsulta.add(mnListarPorDiretor);
@@ -158,12 +176,12 @@ public class TelaPrincipal {
 		JMenuItem mnManualDoUsuario = new JMenuItem("New menu item");
 		mnManualDoUsuario.setAction(action_ManualDoUsuario);
 		mnAjuda.add(mnManualDoUsuario);
-		mnManualDoUsuario.setEnabled(false);
+		//mnManualDoUsuario.setEnabled(false);
 
 		JMenuItem mnSobre = new JMenuItem("New menu item");
 		mnSobre.setAction(action_Sobre);
 		mnAjuda.add(mnSobre);
-		mnSobre.setEnabled(false);
+		// mnSobre.setEnabled(false);
 
 	}
 
@@ -223,7 +241,7 @@ public class TelaPrincipal {
 
 		public void actionPerformed(ActionEvent e) {
 			card.show(frame.getContentPane(), "name_RemoverFilme");
-			
+
 		}
 	}
 
@@ -294,7 +312,7 @@ public class TelaPrincipal {
 		}
 
 		public void actionPerformed(ActionEvent e) {
-			card.show(frame.getContentPane(), "name_ManualDoUsuário");
+			card.show(frame.getContentPane(), "name_Manual");
 		}
 	}
 
@@ -305,6 +323,7 @@ public class TelaPrincipal {
 		}
 
 		public void actionPerformed(ActionEvent e) {
+			JOptionPane.showMessageDialog(null, "");
 			card.show(frame.getContentPane(), "name_Sobre");
 		}
 	}

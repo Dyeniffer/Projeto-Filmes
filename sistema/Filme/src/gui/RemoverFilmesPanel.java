@@ -36,15 +36,17 @@ public class RemoverFilmesPanel extends JPanel {
 	
 	public void alimentaTabela(){
 		try {
-			setTable(new JTable(new RemoverFilmesTableModel()));
+			table.setModel(new RemoverFilmesTableModel());
+	//		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
+
 	public RemoverFilmesPanel() {
 		setBackground(Color.WHITE);
-
+		setTable(new JTable());
 		setLayout(new BorderLayout());
 		alimentaTabela();
 //		try {

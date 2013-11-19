@@ -32,10 +32,11 @@ public class RemoverFilmeAction extends AbstractAction {
 		for (int i = 0; i <= panel.getTable().getRowCount(); i++) {
 			if (panel.getTable().isCellSelected(i, 1)) {
 				FilmeDao dao = new FilmeDao();
-				List<Filme> lista = dao.RemoverFilmes();
+				List<Filme> lista = dao.listarFilmes();
 				dao.RemoveFilmePorNome(lista.get(i).getNome());
 			}
 		}
+		
 		JOptionPane.showMessageDialog(null, "Removidos com sucesso!");
 		panel.alimentaTabela();
 	}

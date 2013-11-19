@@ -131,7 +131,7 @@ public class FilmeDao {
 		return lista;
 	}
 	
-	public List<Filme> RemoverFilmes() {
+	public List<Filme> listarFilmes() {
 
 		List<Filme> lista = new ArrayList<Filme>();
 		String cmd = "SELECT * FROM filmes";
