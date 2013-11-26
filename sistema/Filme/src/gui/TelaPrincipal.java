@@ -22,6 +22,8 @@ import javax.swing.Action;
 import sun.awt.AWTAccessor.MenuAccessor;
 
 import java.awt.Color;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -45,7 +47,6 @@ public class TelaPrincipal {
 	private CadastrarFilmePanel cdFilmePanel = new CadastrarFilmePanel();
 	private ListarFilmePanel fdFilmePanel = new ListarFilmePanel();
 	private RemoverFilmesPanel removeFilmePanel = new RemoverFilmesPanel();
-	private ManualPanel manualPanel = new ManualPanel();
 	private CriarBKPBDPanel bkpPanel = new CriarBKPBDPanel();
 	
 	private final Action action_ListarPorDiretor = new SwingAction_5(
@@ -112,15 +113,9 @@ public class TelaPrincipal {
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setBackground(Color.WHITE);
-		frame.getContentPane().add(panel_3, "name_Manual");
+		frame.getContentPane().add(panel_3, "name_CriarBKPBD");
 
-		panel_3.add(manualPanel);
-
-		JPanel panel_4 = new JPanel();
-		panel_4.setBackground(Color.WHITE);
-		frame.getContentPane().add(panel_4, "name_CriarBKPBD");
-
-		panel_4.add(bkpPanel);
+		panel_3.add(bkpPanel);
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
 
@@ -312,7 +307,12 @@ public class TelaPrincipal {
 		}
 
 		public void actionPerformed(ActionEvent e) {
-			card.show(frame.getContentPane(), "name_Manual");
+			try {
+				java.awt.Desktop.getDesktop().browse( new java.net.URI( "https://github.com/Dyeniffer/Projeto-Filmes/wiki/Manual-do-Sistema" ) );
+			} catch (IOException | URISyntaxException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} 
 		}
 	}
 
