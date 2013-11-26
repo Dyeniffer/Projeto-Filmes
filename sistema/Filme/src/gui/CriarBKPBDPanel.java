@@ -1,6 +1,7 @@
 package gui;
 
 import gui.Action.SalvarBKPAction;
+import gui.Action.SelecionarLocalBKPAction;
 
 import javax.swing.JPanel;
 import java.awt.Color;
@@ -29,6 +30,7 @@ import java.awt.GridBagConstraints;
 import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class CriarBKPBDPanel extends JPanel {
 	private String caminho;
@@ -39,23 +41,32 @@ public class CriarBKPBDPanel extends JPanel {
 	 */
 	public CriarBKPBDPanel() {
 		setBackground(Color.WHITE);
+		SelecionarLocalBKPAction sl = new SelecionarLocalBKPAction(this);
 		
-		JButton btnCriarCpiaDe = new JButton(new SalvarBKPAction(this));
+		JButton btnCriarCpiaDe = new JButton(sl);
+		btnCriarCpiaDe.setText("Escolher local do Banco de Dados");
 		btnCriarCpiaDe.setFont(new Font("Segoe UI Light", Font.PLAIN, 13));
+		
+		JButton btnNewButton = new JButton(new SalvarBKPAction(this, sl));
+		btnNewButton.setFont(new Font("Segoe UI Light", Font.PLAIN, 13));
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(125)
-					.addComponent(btnCriarCpiaDe)
-					.addContainerGap(158, Short.MAX_VALUE))
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(btnNewButton, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(btnCriarCpiaDe, Alignment.LEADING))
+					.addContainerGap(106, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(132)
 					.addComponent(btnCriarCpiaDe)
-					.addContainerGap(141, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnNewButton)
+					.addContainerGap(112, Short.MAX_VALUE))
 		);
 		setLayout(groupLayout);
 		

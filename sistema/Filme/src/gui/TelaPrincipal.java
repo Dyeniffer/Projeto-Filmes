@@ -115,7 +115,7 @@ public class TelaPrincipal {
 		panel_3.setBackground(Color.WHITE);
 		frame.getContentPane().add(panel_3, "name_CriarBKPBD");
 
-		panel_3.add(bkpPanel);
+		panel_3	.add(bkpPanel);
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
 
@@ -128,17 +128,17 @@ public class TelaPrincipal {
 		menuBar.add(mnConsulta);
 		menuBar.add(mnAjuda);
 
-		JMenuItem mnCriarBKPBanco = new JMenuItem("New menu item");
-		mnCriarBKPBanco.setAction(action_CriarBKPBanco);
-		mnArquivo.add(mnCriarBKPBanco);
+//		JMenuItem mnCriarBKPBanco = new JMenuItem("New menu item");
+//		mnCriarBKPBanco.setAction(action_CriarBKPBanco);
+//		mnArquivo.add(mnCriarBKPBanco);
 		//mnCriarBKPBanco.setEnabled(false);
 
-		JMenuItem mnRestaurarBKPBanco = new JMenuItem("New menu item");
-		mnRestaurarBKPBanco.setAction(action_RestaurarBKPBanco);
-		mnArquivo.add(mnRestaurarBKPBanco);
-		mnRestaurarBKPBanco.setEnabled(false);
-
-		mnArquivo.addSeparator();
+//		JMenuItem mnRestaurarBKPBanco = new JMenuItem("New menu item");
+//		mnRestaurarBKPBanco.setAction(action_RestaurarBKPBanco);
+//		mnArquivo.add(mnRestaurarBKPBanco);
+//		mnRestaurarBKPBanco.setEnabled(false);
+//
+//		mnArquivo.addSeparator();
 
 		JMenuItem mnSair = new JMenuItem("New menu item");
 		mnSair.setAction(action_Sair);
@@ -323,8 +323,10 @@ public class TelaPrincipal {
 		}
 
 		public void actionPerformed(ActionEvent e) {
-			JOptionPane.showMessageDialog(null, "");
-			card.show(frame.getContentPane(), "name_Sobre");
+			JOptionPane.showMessageDialog(frame,
+                    "v. 1.0 (final) (c) 2013, ENGSOFT III, FSPOA.",
+                    "Filmes",
+                    JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 }
